@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => NotificationProvider()),
       ],
       child: Scaffold(
+        backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           title: Consumer<HomeProvider>(
             builder: (BuildContext context, HomeProvider provider, Widget? child) =>
@@ -30,12 +31,14 @@ class HomePage extends StatelessWidget {
               builder: (BuildContext context, TimerProvider provider, Widget? child) =>
                   TimerComponent(provider: provider),
             ),
+             Divider(thickness: 1.0, color: Colors.grey.shade300),
             Expanded(
               child: Consumer<NotificationProvider>(
                 builder: (BuildContext context, NotificationProvider provider, Widget? child) =>
                     NotificationListComponent(provider: provider),
               ),
             ),
+            const SizedBox(height: 10.0),
           ],
         ),
       ),
