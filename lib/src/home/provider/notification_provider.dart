@@ -40,7 +40,8 @@ class NotificationProvider extends ChangeNotifier {
       }).toList();
 
       for (NotificationItemModel item in notiItems) {
-        if ((item.expiredAt?.isBefore(DateTime.now()) ?? true) || isSameDay(item.expiredAt ?? DateTime(1970), DateTime.now())) removeNotiItem(item);
+        if ((item.expiredAt?.isBefore(DateTime.now()) ?? true) ||
+            isSameDay(item.expiredAt ?? DateTime(1970), DateTime.now())) removeNotiItem(item);
       }
     }
     notifyListeners();
@@ -104,22 +105,18 @@ class NotificationProvider extends ChangeNotifier {
   /// ## calculateScheduleSeconds(NotificationItemModel)
   /// Calculate when notification will be displayed.
   Duration calculateScheduleSeconds(NotificationItemModel item) {
-    tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation('Asia/Seoul'));
 
     final DateTime expiredDay = DateTime(item.expiredAt!.year, item.expiredAt!.month, item.expiredAt!.day, 9);
     final DateTime today = DateTime.now();
 
-     return Duration(seconds: expiredDay.difference(today).inSeconds);
+    return Duration(seconds: expiredDay.difference(today).inSeconds);
   }
-
 
   /// ## createLocalNotification(NotificationItemModel)
   /// Create scheduled notification.
   /// - every notification will be announced 9:00A.M each day.
   void createLocalNotification(NotificationItemModel item) async {
     final notiTime = calculateScheduleSeconds(item);
-
     AndroidNotificationDetails androidNotificationDetails = const AndroidNotificationDetails(
       'st_001',
       'localNotification',
@@ -132,6 +129,8 @@ class NotificationProvider extends ChangeNotifier {
     );
     NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
 
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Asia/Seoul'));
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
       '${item.title}',
