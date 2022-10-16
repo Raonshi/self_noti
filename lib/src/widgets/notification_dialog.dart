@@ -6,10 +6,11 @@ import 'package:self_noti/src/home/provider/notification_provider.dart';
 import 'package:self_noti/style/styles.dart';
 
 class NotificationDialog extends StatelessWidget {
-  const NotificationDialog({Key? key, required this.provider, this.index}) : super(key: key);
+  NotificationDialog({Key? key, required this.provider, this.index}) : super(key: key);
 
   final NotificationProvider provider;
   final int? index;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,45 +18,49 @@ class NotificationDialog extends StatelessWidget {
       value: provider,
       child: Consumer<NotificationProvider>(
         builder: (BuildContext context, NotificationProvider provider, Widget? child) {
-          NotificationItemModel notiItem = const NotificationItemModel();
+           NotificationItemModel notiItem = index == null ? const NotificationItemModel() : provider.notiItems[index!];
+
           return AlertDialog(
             title: const Text('알림 추가'),
             content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Title
-                  _NotificationInputField(
-                    label: '제목',
-                    initialValue: index == null ? null : provider.notiItems[index!].title,
-                    onChanged: (String value) {
-                      notiItem = notiItem.copyWith(title: value);
-                    },
-                  ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Title
+                    _NotificationInputField(
+                      label: '제목',
+                      initialValue: index == null ? null : provider.notiItems[index!].title,
+                      onChanged: (String value) {
+                        notiItem = notiItem.copyWith(title: value);
+                      },
+                    ),
 
-                  const SizedBox(height: 4.0),
+                    const SizedBox(height: 4.0),
 
-                  // Content
-                  _NotificationInputField(
-                    label: '내용',
-                    maxLine: 5,
-                    maxLength: 300,
-                    initialValue: index == null ? null : provider.notiItems[index!].content,
-                    onChanged: (String value) {
-                      notiItem = notiItem.copyWith(content: value);
-                    },
-                  ),
-                  const SizedBox(height: 4.0),
+                    // Content
+                    _NotificationInputField(
+                      label: '내용',
+                      maxLine: 5,
+                      maxLength: 300,
+                      initialValue: index == null ? null : provider.notiItems[index!].content,
+                      onChanged: (String value) {
+                        notiItem = notiItem.copyWith(content: value);
+                      },
+                    ),
+                    const SizedBox(height: 4.0),
 
-                  // Expired Day
-                  _NotificationDateInputField(
-                    label: '종료 날짜',
-                    initialValue: index == null ? null : provider.notiItems[index!].expiredAt,
-                    onChanged: (DateTime? date) {
-                      notiItem = notiItem.copyWith(expiredAt: date);
-                    },
-                  ),
-                ],
+                    // Expired Day
+                    _NotificationDateInputField(
+                      label: '종료 날짜',
+                      initialValue: index == null ? null : provider.notiItems[index!].expiredAt,
+                      onChanged: (DateTime? date) {
+                        notiItem = notiItem.copyWith(expiredAt: date);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
             actions: [
@@ -69,12 +74,14 @@ class NotificationDialog extends StatelessWidget {
               ElevatedButton(
                 style: mainButtonStyleForm,
                 onPressed: () {
-                  if (index == null) {
-                    provider.addNotiItem(notiItem);
-                  } else {
-                    provider.updateNotiItem(notiItem, index!);
+                  if(_formKey.currentState!.validate()){
+                    if (index == null) {
+                      provider.addNotiItem(notiItem);
+                    } else {
+                      provider.updateNotiItem(notiItem, index!);
+                    }
+                    Navigator.of(context).pop();
                   }
-                  Navigator.of(context).pop();
                 },
                 child: Text(index == null ? '생성' : '수정', style: buttonTextStyle.copyWith(fontSize: 16.0)),
               ),
@@ -141,6 +148,12 @@ class _NotificationInputFieldState extends State<_NotificationInputField> {
             focusedBorder: getBorder(Colors.black),
             focusedErrorBorder: getBorder(Colors.red.shade400),
           ),
+          validator: (String? val){
+            if(val?.isEmpty ?? true){
+              return '${widget.label}을 입력해주세요';
+            }
+            return null;
+          },
         ),
       ],
     );
@@ -203,6 +216,12 @@ class _NotificationInputDateFieldState extends State<_NotificationDateInputField
             focusedBorder: getBorder(Colors.black),
             focusedErrorBorder: getBorder(Colors.red.shade400),
           ),
+          validator: (String? val){
+            if(val?.isEmpty ?? true){
+              return '${widget.label}을 입력해주세요';
+            }
+            return null;
+          },
         ),
         if (isCalendarOpen)
           SizedBox(
