@@ -18,14 +18,25 @@ class NotificationProvider extends ChangeNotifier {
   void initNotiItems() async {
     if (localStorage.containsKey('notificationItems')) {
       List<String>? data = localStorage.getStringList('notificationItems');
-      if(data == null){
-        return;
-      }
+      if (data == null) return;
       notiItems = data.map((e) {
-        Map<String, dynamic> jsonData = json.decoder.convert(e);
-        return  NotificationItemModel.fromJson(json.decode(e));
+        return NotificationItemModel.fromJson(json.decode(e));
       }).toList();
+
+      for (NotificationItemModel item in notiItems) {
+        if (item.expiredAt?.isBefore(DateTime.now()) ?? true) removeNotiItem(item);
+      }
     }
+    notifyListeners();
+  }
+
+  void removeNotiItem(NotificationItemModel item){
+    notiItems.remove(item);
+    notifyListeners();
+  }
+
+  void removeNotiItemFromIndex(int index) {
+    notiItems.removeAt(index);
     notifyListeners();
   }
 
@@ -44,7 +55,7 @@ class NotificationProvider extends ChangeNotifier {
   }
 
   List<String> convertNotificationItemModelToString() {
-    List<Map<String, dynamic>> jsonList= notiItems.map((e) => e.toJson()).toList();
+    List<Map<String, dynamic>> jsonList = notiItems.map((e) => e.toJson()).toList();
     return jsonList.map((e) => json.encode(e)).toList();
   }
 }

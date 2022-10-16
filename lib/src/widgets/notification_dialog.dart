@@ -22,44 +22,47 @@ class NotificationDialog extends StatelessWidget {
 
           return AlertDialog(
             title: const Text('알림 추가'),
-            content: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Title
-                    _NotificationInputField(
-                      label: '제목',
-                      initialValue: index == null ? null : provider.notiItems[index!].title,
-                      onChanged: (String value) {
-                        notiItem = notiItem.copyWith(title: value);
-                      },
-                    ),
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Title
+                      _NotificationInputField(
+                        label: '제목',
+                        initialValue: index == null ? null : provider.notiItems[index!].title,
+                        onChanged: (String value) {
+                          notiItem = notiItem.copyWith(title: value);
+                        },
+                      ),
 
-                    const SizedBox(height: 4.0),
+                      const SizedBox(height: 4.0),
 
-                    // Content
-                    _NotificationInputField(
-                      label: '내용',
-                      maxLine: 5,
-                      maxLength: 300,
-                      initialValue: index == null ? null : provider.notiItems[index!].content,
-                      onChanged: (String value) {
-                        notiItem = notiItem.copyWith(content: value);
-                      },
-                    ),
-                    const SizedBox(height: 4.0),
+                      // Content
+                      _NotificationInputField(
+                        label: '내용',
+                        maxLine: 5,
+                        maxLength: 300,
+                        initialValue: index == null ? null : provider.notiItems[index!].content,
+                        onChanged: (String value) {
+                          notiItem = notiItem.copyWith(content: value);
+                        },
+                      ),
+                      const SizedBox(height: 4.0),
 
-                    // Expired Day
-                    _NotificationDateInputField(
-                      label: '종료 날짜',
-                      initialValue: index == null ? null : provider.notiItems[index!].expiredAt,
-                      onChanged: (DateTime? date) {
-                        notiItem = notiItem.copyWith(expiredAt: date);
-                      },
-                    ),
-                  ],
+                      // Expired Day
+                      _NotificationDateInputField(
+                        label: '종료 날짜',
+                        initialValue: index == null ? null : provider.notiItems[index!].expiredAt,
+                        onChanged: (DateTime? date) {
+                          notiItem = notiItem.copyWith(expiredAt: date);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -220,6 +223,11 @@ class _NotificationInputDateFieldState extends State<_NotificationDateInputField
             if(val?.isEmpty ?? true){
               return '${widget.label}을 입력해주세요';
             }
+
+            if(DateFormat('yyyy년 MM월 dd일').parse(val!).isBefore(DateTime.now())){
+              return '오늘 이후의 날짜로 설정해주세요';
+            }
+
             return null;
           },
         ),
