@@ -8,9 +8,10 @@ import 'package:self_noti/src/home/provider/timer_provider.dart';
 import 'package:self_noti/style/styles.dart';
 
 class NotificationDialog extends StatelessWidget {
-  const NotificationDialog({Key? key, required this.provider}) : super(key: key);
+  const NotificationDialog({Key? key, required this.provider, this.index}) : super(key: key);
 
   final NotificationProvider provider;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class NotificationDialog extends StatelessWidget {
                   // Title
                   _NotificationInputField(
                     label: '제목',
+                    initialValue: index == null ? null : provider.notiItems[index!].title,
                     onChanged: (String value) {
                       notiItem = notiItem.copyWith(title: value);
                     },
@@ -40,6 +42,7 @@ class NotificationDialog extends StatelessWidget {
                     label: '내용',
                     maxLine: 5,
                     maxLength: 300,
+                    initialValue: index == null ? null : provider.notiItems[index!].content,
                     onChanged: (String value) {
                       notiItem = notiItem.copyWith(content: value);
                     },
@@ -49,6 +52,7 @@ class NotificationDialog extends StatelessWidget {
                   // Expired Day
                   _NotificationDateInputField(
                     label: '종료 날짜',
+                    initialValue: index == null ? null : provider.notiItems[index!].expiredAt,
                     onChanged: (DateTime? date) {
                       notiItem = notiItem.copyWith(expiredAt: date);
                     },
@@ -66,7 +70,11 @@ class NotificationDialog extends StatelessWidget {
               ElevatedButton(
                   style: mainButtonStyleForm,
                   onPressed: () {
-                    provider.addNotiItem(notiItem);
+                    if(index == null){
+                      provider.addNotiItem(notiItem);
+                    }else{
+                      provider.updateNotiItem(notiItem, index!);
+                    }
                     Navigator.of(context).pop();
                   },
                   child: Text('생성', style: buttonTextStyle.copyWith(fontSize: 16.0))),
@@ -87,12 +95,14 @@ class _NotificationInputField extends StatefulWidget {
     this.onChanged,
     this.maxLength,
     this.maxLine,
+    this.initialValue,
   }) : super(key: key);
 
   final String? label;
   final ValueChanged<String>? onChanged;
   final int? maxLine;
   final int? maxLength;
+  final String? initialValue;
 
   final TextEditingController textEditingController = TextEditingController();
 
@@ -101,6 +111,15 @@ class _NotificationInputField extends StatefulWidget {
 }
 
 class _NotificationInputFieldState extends State<_NotificationInputField> {
+  
+  @override
+  void initState() {
+    if(widget.initialValue != null){
+      widget.textEditingController.text = widget.initialValue!;
+    }
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -108,6 +127,7 @@ class _NotificationInputFieldState extends State<_NotificationInputField> {
       children: [
         if (widget.label != null) Text(widget.label!, style: labelStyle),
         TextFormField(
+          controller: widget.textEditingController,
           onChanged: (String value) {
             setState(() {
               widget.onChanged!(value);
@@ -139,11 +159,13 @@ class _NotificationDateInputField extends StatefulWidget {
     Key? key,
     this.label,
     this.onChanged,
+    this.initialValue,
   }) : super(key: key);
 
   final String? label;
   final ValueChanged<DateTime>? onChanged;
-
+  final DateTime? initialValue;
+  
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -153,6 +175,14 @@ class _NotificationDateInputField extends StatefulWidget {
 class _NotificationInputDateFieldState extends State<_NotificationDateInputField> {
   late DateTime date;
   bool isCalendarOpen = false;
+
+  @override
+  void initState() {
+    if(widget.initialValue != null){
+      widget.textEditingController.text = DateFormat('yyyy년 MM월 dd일').format(widget.initialValue!);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

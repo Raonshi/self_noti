@@ -27,4 +27,10 @@ class NotificationProvider extends ChangeNotifier {
     notiItems.add(item);
     notifyListeners();
   }
+
+  void updateNotiItem(NotificationItem item, int index){
+    item = item.copyWith(updatedAt: DateTime.now());
+    notiItems.replaceRange(index, index+1, [item]);
+    notifyListeners();
+  }
 }

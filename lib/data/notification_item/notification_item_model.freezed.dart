@@ -20,6 +20,7 @@ NotificationItem _$NotificationItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NotificationItem {
+  String? get uid => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $NotificationItemCopyWith<$Res> {
       _$NotificationItemCopyWithImpl<$Res, NotificationItem>;
   @useResult
   $Res call(
-      {String? title,
+      {String? uid,
+      String? title,
       String? content,
       DateTime? createdAt,
       DateTime? updatedAt,
@@ -59,6 +61,7 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uid = freezed,
     Object? title = freezed,
     Object? content = freezed,
     Object? createdAt = freezed,
@@ -66,6 +69,10 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
     Object? expiredAt = freezed,
   }) {
     return _then(_value.copyWith(
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -99,7 +106,8 @@ abstract class _$$_NotificationItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? title,
+      {String? uid,
+      String? title,
       String? content,
       DateTime? createdAt,
       DateTime? updatedAt,
@@ -117,6 +125,7 @@ class __$$_NotificationItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uid = freezed,
     Object? title = freezed,
     Object? content = freezed,
     Object? createdAt = freezed,
@@ -124,6 +133,10 @@ class __$$_NotificationItemCopyWithImpl<$Res>
     Object? expiredAt = freezed,
   }) {
     return _then(_$_NotificationItem(
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -154,7 +167,8 @@ class _$_NotificationItem
     with DiagnosticableTreeMixin
     implements _NotificationItem {
   const _$_NotificationItem(
-      {this.title,
+      {this.uid,
+      this.title,
       this.content,
       this.createdAt,
       this.updatedAt,
@@ -163,6 +177,8 @@ class _$_NotificationItem
   factory _$_NotificationItem.fromJson(Map<String, dynamic> json) =>
       _$$_NotificationItemFromJson(json);
 
+  @override
+  final String? uid;
   @override
   final String? title;
   @override
@@ -176,7 +192,7 @@ class _$_NotificationItem
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationItem(title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, expiredAt: $expiredAt)';
+    return 'NotificationItem(uid: $uid, title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, expiredAt: $expiredAt)';
   }
 
   @override
@@ -184,6 +200,7 @@ class _$_NotificationItem
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NotificationItem'))
+      ..add(DiagnosticsProperty('uid', uid))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('createdAt', createdAt))
@@ -196,6 +213,7 @@ class _$_NotificationItem
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NotificationItem &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.createdAt, createdAt) ||
@@ -208,8 +226,8 @@ class _$_NotificationItem
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, content, createdAt, updatedAt, expiredAt);
+  int get hashCode => Object.hash(
+      runtimeType, uid, title, content, createdAt, updatedAt, expiredAt);
 
   @JsonKey(ignore: true)
   @override
@@ -227,7 +245,8 @@ class _$_NotificationItem
 
 abstract class _NotificationItem implements NotificationItem {
   const factory _NotificationItem(
-      {final String? title,
+      {final String? uid,
+      final String? title,
       final String? content,
       final DateTime? createdAt,
       final DateTime? updatedAt,
@@ -236,6 +255,8 @@ abstract class _NotificationItem implements NotificationItem {
   factory _NotificationItem.fromJson(Map<String, dynamic> json) =
       _$_NotificationItem.fromJson;
 
+  @override
+  String? get uid;
   @override
   String? get title;
   @override

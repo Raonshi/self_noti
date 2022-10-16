@@ -7,6 +7,7 @@ part 'notification_item_model.g.dart';
 @freezed
 class NotificationItem with _$NotificationItem {
   const factory NotificationItem({
+    String? uid,
     String? title,
     String? content,
     DateTime? createdAt,

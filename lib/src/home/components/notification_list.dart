@@ -25,7 +25,14 @@ class NotificationListComponent extends StatelessWidget {
                       decoration: BoxDecoration(color: index % 2 == 0 ? Colors.grey.shade50 : Colors.grey.shade100),
                       child: _NotificationListItem(
                         item: provider.notiItems[index],
-                        onTap: () {},
+                        onTap: () async {
+                          await showDialog(
+                            context: context,
+                            builder: (_) {
+                              return NotificationDialog(provider: provider, index: index);
+                            },
+                          );
+                        },
                       ),
                     );
                   },
