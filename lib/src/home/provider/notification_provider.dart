@@ -1,36 +1,50 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:self_noti/data/notification_item/notification_item_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationProvider extends ChangeNotifier {
   String title = 'Self Noti';
-  List<NotificationItem> notiItems = [];
+  List<NotificationItemModel> notiItems = [];
+  late final SharedPreferences localStorage;
 
-  NotificationProvider(){
-    // initNotiItems();
+  NotificationProvider() {
+    initStorage().then((_) => initNotiItems());
   }
 
-  void initNotiItems() {
-    notiItems = List.generate(
-      10,
-      (index) => NotificationItem(
-        title: 'Test_$index',
-        content: 'Super Contents_$index',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-      ),
-    );
+  Future<void> initStorage() async => localStorage = await SharedPreferences.getInstance();
+
+  void initNotiItems() async {
+    if (localStorage.containsKey('notificationItems')) {
+      List<String>? data = localStorage.getStringList('notificationItems');
+      if(data == null){
+        return;
+      }
+      notiItems = data.map((e) {
+        Map<String, dynamic> jsonData = json.decoder.convert(e);
+        return  NotificationItemModel.fromJson(json.decode(e));
+      }).toList();
+    }
     notifyListeners();
   }
 
-  void addNotiItem(NotificationItem item) {
+  void addNotiItem(NotificationItemModel item) {
     item = item.copyWith(createdAt: DateTime.now());
     notiItems.add(item);
+    localStorage.setStringList('notificationItems', convertNotificationItemModelToString());
     notifyListeners();
   }
 
-  void updateNotiItem(NotificationItem item, int index){
+  void updateNotiItem(NotificationItemModel item, int index) {
     item = item.copyWith(updatedAt: DateTime.now());
-    notiItems.replaceRange(index, index+1, [item]);
+    notiItems.replaceRange(index, index + 1, [item]);
+    localStorage.setStringList('notificationItems', convertNotificationItemModelToString());
     notifyListeners();
+  }
+
+  List<String> convertNotificationItemModelToString() {
+    List<Map<String, dynamic>> jsonList= notiItems.map((e) => e.toJson()).toList();
+    return jsonList.map((e) => json.encode(e)).toList();
   }
 }

@@ -18,12 +18,19 @@ class HomePage extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => NotificationProvider()),
       ],
       child: Scaffold(
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           title: Consumer<HomeProvider>(
             builder: (BuildContext context, HomeProvider provider, Widget? child) =>
                 Text(Provider.of<HomeProvider>(context).title),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  print('App Bar Menu Click!!!!!!!!!');
+                },
+                icon: const Icon(Icons.menu)),
+          ],
         ),
         body: Column(
           children: [
@@ -31,8 +38,12 @@ class HomePage extends StatelessWidget {
               builder: (BuildContext context, TimerProvider provider, Widget? child) =>
                   TimerComponent(provider: provider),
             ),
-             SizedBox(height: 4.0),
-             Divider(thickness: 2.0, color: Colors.grey.shade300, height: 1.0,),
+            const SizedBox(height: 4.0),
+            Divider(
+              thickness: 2.0,
+              color: Theme.of(context).colorScheme.surface,
+              height: 1.0,
+            ),
             Expanded(
               child: Consumer<NotificationProvider>(
                 builder: (BuildContext context, NotificationProvider provider, Widget? child) =>

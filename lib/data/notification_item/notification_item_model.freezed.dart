@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NotificationItem _$NotificationItemFromJson(Map<String, dynamic> json) {
-  return _NotificationItem.fromJson(json);
+NotificationItemModel _$NotificationItemModelFromJson(
+    Map<String, dynamic> json) {
+  return _NotificationItemModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NotificationItem {
+mixin _$NotificationItemModel {
   String? get uid => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
@@ -29,15 +30,15 @@ mixin _$NotificationItem {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NotificationItemCopyWith<NotificationItem> get copyWith =>
+  $NotificationItemModelCopyWith<NotificationItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NotificationItemCopyWith<$Res> {
-  factory $NotificationItemCopyWith(
-          NotificationItem value, $Res Function(NotificationItem) then) =
-      _$NotificationItemCopyWithImpl<$Res, NotificationItem>;
+abstract class $NotificationItemModelCopyWith<$Res> {
+  factory $NotificationItemModelCopyWith(NotificationItemModel value,
+          $Res Function(NotificationItemModel) then) =
+      _$NotificationItemModelCopyWithImpl<$Res, NotificationItemModel>;
   @useResult
   $Res call(
       {String? uid,
@@ -49,9 +50,10 @@ abstract class $NotificationItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
-    implements $NotificationItemCopyWith<$Res> {
-  _$NotificationItemCopyWithImpl(this._value, this._then);
+class _$NotificationItemModelCopyWithImpl<$Res,
+        $Val extends NotificationItemModel>
+    implements $NotificationItemModelCopyWith<$Res> {
+  _$NotificationItemModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -98,11 +100,11 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
 }
 
 /// @nodoc
-abstract class _$$_NotificationItemCopyWith<$Res>
-    implements $NotificationItemCopyWith<$Res> {
-  factory _$$_NotificationItemCopyWith(
-          _$_NotificationItem value, $Res Function(_$_NotificationItem) then) =
-      __$$_NotificationItemCopyWithImpl<$Res>;
+abstract class _$$_NotificationItemModelCopyWith<$Res>
+    implements $NotificationItemModelCopyWith<$Res> {
+  factory _$$_NotificationItemModelCopyWith(_$_NotificationItemModel value,
+          $Res Function(_$_NotificationItemModel) then) =
+      __$$_NotificationItemModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +117,11 @@ abstract class _$$_NotificationItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationItemCopyWithImpl<$Res>
-    extends _$NotificationItemCopyWithImpl<$Res, _$_NotificationItem>
-    implements _$$_NotificationItemCopyWith<$Res> {
-  __$$_NotificationItemCopyWithImpl(
-      _$_NotificationItem _value, $Res Function(_$_NotificationItem) _then)
+class __$$_NotificationItemModelCopyWithImpl<$Res>
+    extends _$NotificationItemModelCopyWithImpl<$Res, _$_NotificationItemModel>
+    implements _$$_NotificationItemModelCopyWith<$Res> {
+  __$$_NotificationItemModelCopyWithImpl(_$_NotificationItemModel _value,
+      $Res Function(_$_NotificationItemModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +134,7 @@ class __$$_NotificationItemCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? expiredAt = freezed,
   }) {
-    return _then(_$_NotificationItem(
+    return _then(_$_NotificationItemModel(
       uid: freezed == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -163,10 +165,10 @@ class __$$_NotificationItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NotificationItem
+class _$_NotificationItemModel
     with DiagnosticableTreeMixin
-    implements _NotificationItem {
-  const _$_NotificationItem(
+    implements _NotificationItemModel {
+  const _$_NotificationItemModel(
       {this.uid,
       this.title,
       this.content,
@@ -174,8 +176,8 @@ class _$_NotificationItem
       this.updatedAt,
       this.expiredAt});
 
-  factory _$_NotificationItem.fromJson(Map<String, dynamic> json) =>
-      _$$_NotificationItemFromJson(json);
+  factory _$_NotificationItemModel.fromJson(Map<String, dynamic> json) =>
+      _$$_NotificationItemModelFromJson(json);
 
   @override
   final String? uid;
@@ -192,14 +194,14 @@ class _$_NotificationItem
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationItem(uid: $uid, title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, expiredAt: $expiredAt)';
+    return 'NotificationItemModel(uid: $uid, title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, expiredAt: $expiredAt)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'NotificationItem'))
+      ..add(DiagnosticsProperty('type', 'NotificationItemModel'))
       ..add(DiagnosticsProperty('uid', uid))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
@@ -212,7 +214,7 @@ class _$_NotificationItem
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotificationItem &&
+            other is _$_NotificationItemModel &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
@@ -232,28 +234,29 @@ class _$_NotificationItem
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationItemCopyWith<_$_NotificationItem> get copyWith =>
-      __$$_NotificationItemCopyWithImpl<_$_NotificationItem>(this, _$identity);
+  _$$_NotificationItemModelCopyWith<_$_NotificationItemModel> get copyWith =>
+      __$$_NotificationItemModelCopyWithImpl<_$_NotificationItemModel>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NotificationItemToJson(
+    return _$$_NotificationItemModelToJson(
       this,
     );
   }
 }
 
-abstract class _NotificationItem implements NotificationItem {
-  const factory _NotificationItem(
+abstract class _NotificationItemModel implements NotificationItemModel {
+  const factory _NotificationItemModel(
       {final String? uid,
       final String? title,
       final String? content,
       final DateTime? createdAt,
       final DateTime? updatedAt,
-      final DateTime? expiredAt}) = _$_NotificationItem;
+      final DateTime? expiredAt}) = _$_NotificationItemModel;
 
-  factory _NotificationItem.fromJson(Map<String, dynamic> json) =
-      _$_NotificationItem.fromJson;
+  factory _NotificationItemModel.fromJson(Map<String, dynamic> json) =
+      _$_NotificationItemModel.fromJson;
 
   @override
   String? get uid;
@@ -269,6 +272,6 @@ abstract class _NotificationItem implements NotificationItem {
   DateTime? get expiredAt;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationItemCopyWith<_$_NotificationItem> get copyWith =>
+  _$$_NotificationItemModelCopyWith<_$_NotificationItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

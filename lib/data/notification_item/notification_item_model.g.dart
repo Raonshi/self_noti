@@ -6,8 +6,9 @@ part of 'notification_item_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NotificationItem _$$_NotificationItemFromJson(Map<String, dynamic> json) =>
-    _$_NotificationItem(
+_$_NotificationItemModel _$$_NotificationItemModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_NotificationItemModel(
       uid: json['uid'] as String?,
       title: json['title'] as String?,
       content: json['content'] as String?,
@@ -22,7 +23,8 @@ _$_NotificationItem _$$_NotificationItemFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['expiredAt'] as String),
     );
 
-Map<String, dynamic> _$$_NotificationItemToJson(_$_NotificationItem instance) =>
+Map<String, dynamic> _$$_NotificationItemModelToJson(
+        _$_NotificationItemModel instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'title': instance.title,

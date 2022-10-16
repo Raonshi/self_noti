@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:self_noti/data/notification_item/notification_item_model.dart';
 import 'package:self_noti/src/home/provider/notification_provider.dart';
+import 'package:self_noti/src/widgets/empty_widget.dart';
 import 'package:self_noti/src/widgets/notification_dialog.dart';
 import 'package:self_noti/style/styles.dart';
 
@@ -16,13 +17,17 @@ class NotificationListComponent extends StatelessWidget {
       children: [
         Expanded(
           child: provider.notiItems.isEmpty
-              ? const Text('알림이 없습니다')
+              ? const EmptyWidget()
               : ListView.builder(
                   shrinkWrap: true,
                   itemCount: provider.notiItems.length,
                   itemBuilder: (BuildContext context, int index) {
                     return DecoratedBox(
-                      decoration: BoxDecoration(color: index % 2 == 0 ? Colors.grey.shade50 : Colors.grey.shade100),
+                      decoration: BoxDecoration(
+                        color: index % 2 == 0
+                            ? Theme.of(context).colorScheme.primaryContainer
+                            : Theme.of(context).colorScheme.secondaryContainer,
+                      ),
                       child: _NotificationListItem(
                         item: provider.notiItems[index],
                         onTap: () async {
@@ -65,7 +70,7 @@ class NotificationListComponent extends StatelessWidget {
 class _NotificationListItem extends StatelessWidget {
   const _NotificationListItem({Key? key, this.item, this.onTap}) : super(key: key);
 
-  final NotificationItem? item;
+  final NotificationItemModel? item;
   final VoidCallback? onTap;
 
   @override
@@ -92,7 +97,7 @@ class _NotificationListItem extends StatelessWidget {
         padding: EdgeInsets.zero,
         onPressed: onTap,
         iconSize: 32.0,
-        icon: const Icon(Icons.chevron_right_rounded, color: Colors.black),
+        icon: Icon(Icons.chevron_right_rounded, color: Theme.of(context).colorScheme.primary),
       ),
     );
   }

@@ -5,16 +5,16 @@ part 'notification_item_model.freezed.dart';
 part 'notification_item_model.g.dart';
 
 @freezed
-class NotificationItem with _$NotificationItem {
-  const factory NotificationItem({
+class NotificationItemModel with _$NotificationItemModel {
+  const factory NotificationItemModel({
     String? uid,
     String? title,
     String? content,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? expiredAt,
-  }) = _NotificationItem;
+  }) = _NotificationItemModel;
 
-  factory NotificationItem.fromJson(Map<String, Object?> json)
-  => _$NotificationItemFromJson(json);
+  factory NotificationItemModel.fromJson(Map<String, Object?> json)
+  => _$NotificationItemModelFromJson(json);
 }

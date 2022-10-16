@@ -40,9 +40,9 @@ dependencies:
   freezed_annotation: 2.2.0
   json_serializable: 6.5.1
   circular_countdown_timer: 0.2.2
-  awesome_notifications: 0.7.2
   shared_preferences: 2.0.15
   intl: 0.17.0
+  flutter_local_notifications: 12.0.2
 
 dev_dependencies:
   flutter_test:

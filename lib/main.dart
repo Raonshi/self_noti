@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:self_noti/src/home/page.dart';
+import 'package:self_noti/style/styles.dart';
 
 
 void main() {
@@ -13,8 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      theme: lightTheme,
+      home: const HomePage(),
     );
   }
 }

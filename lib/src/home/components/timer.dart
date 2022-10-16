@@ -22,15 +22,15 @@ class TimerComponent extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.3,
             duration: provider.time,
             initialDuration: 0,
-            fillColor: Colors.lightGreen.shade300,
-            ringColor: Colors.grey.shade300,
+            fillColor: Theme.of(context).colorScheme.secondary,
+            ringColor: Theme.of(context).colorScheme.surface,
             strokeWidth: 10.0,
             strokeCap: StrokeCap.round,
             textFormat: getTimerTextFormat(provider.time),
             textStyle: TextStyle(
               fontSize: 32.0,
               fontWeight: FontWeight.w600,
-              color: provider.state == TimerState.counting ? Colors.lightGreen.shade500 : Colors.grey.shade400,
+              color: getTimerTextColor(context, provider.state),
             ),
             isTimerTextShown: true,
             isReverse: true,
@@ -106,6 +106,15 @@ class TimerComponent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Color getTimerTextColor(BuildContext context, TimerState state) {
+    switch (state) {
+      case TimerState.counting:
+        return Theme.of(context).colorScheme.secondary;
+      default:
+        return Theme.of(context).colorScheme.surface;
+    }
   }
 
   String getTimerTextFormat(int time) {

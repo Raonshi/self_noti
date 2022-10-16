@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:self_noti/data/notification_item/notification_item_model.dart';
-import 'package:self_noti/enum.dart';
 import 'package:self_noti/src/home/provider/notification_provider.dart';
-import 'package:self_noti/src/home/provider/timer_provider.dart';
 import 'package:self_noti/style/styles.dart';
 
 class NotificationDialog extends StatelessWidget {
@@ -19,7 +17,7 @@ class NotificationDialog extends StatelessWidget {
       value: provider,
       child: Consumer<NotificationProvider>(
         builder: (BuildContext context, NotificationProvider provider, Widget? child) {
-          NotificationItem notiItem = const NotificationItem();
+          NotificationItemModel notiItem = const NotificationItemModel();
           return AlertDialog(
             title: const Text('알림 추가'),
             content: SingleChildScrollView(
@@ -62,22 +60,24 @@ class NotificationDialog extends StatelessWidget {
             ),
             actions: [
               ElevatedButton(
-                  style: mainButtonStyleForm,
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('취소', style: buttonTextStyle.copyWith(fontSize: 16.0))),
+                style: mainButtonStyleForm,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('취소', style: buttonTextStyle.copyWith(fontSize: 16.0)),
+              ),
               ElevatedButton(
-                  style: mainButtonStyleForm,
-                  onPressed: () {
-                    if(index == null){
-                      provider.addNotiItem(notiItem);
-                    }else{
-                      provider.updateNotiItem(notiItem, index!);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('생성', style: buttonTextStyle.copyWith(fontSize: 16.0))),
+                style: mainButtonStyleForm,
+                onPressed: () {
+                  if (index == null) {
+                    provider.addNotiItem(notiItem);
+                  } else {
+                    provider.updateNotiItem(notiItem, index!);
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: Text(index == null ? '생성' : '수정', style: buttonTextStyle.copyWith(fontSize: 16.0)),
+              ),
             ],
             actionsAlignment: MainAxisAlignment.spaceAround,
           );
@@ -111,15 +111,14 @@ class _NotificationInputField extends StatefulWidget {
 }
 
 class _NotificationInputFieldState extends State<_NotificationInputField> {
-  
   @override
   void initState() {
-    if(widget.initialValue != null){
+    if (widget.initialValue != null) {
       widget.textEditingController.text = widget.initialValue!;
     }
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -165,7 +164,7 @@ class _NotificationDateInputField extends StatefulWidget {
   final String? label;
   final ValueChanged<DateTime>? onChanged;
   final DateTime? initialValue;
-  
+
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -178,7 +177,7 @@ class _NotificationInputDateFieldState extends State<_NotificationDateInputField
 
   @override
   void initState() {
-    if(widget.initialValue != null){
+    if (widget.initialValue != null) {
       widget.textEditingController.text = DateFormat('yyyy년 MM월 dd일').format(widget.initialValue!);
     }
     super.initState();
