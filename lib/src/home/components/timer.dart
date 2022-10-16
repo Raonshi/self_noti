@@ -15,11 +15,11 @@ class TimerComponent extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
           child: CircularCountDownTimer(
             controller: provider.countdownController,
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.3,
+            height: MediaQuery.of(context).size.height * 0.23,
             duration: provider.time,
             initialDuration: 0,
             fillColor: Theme.of(context).colorScheme.secondary,

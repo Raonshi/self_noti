@@ -5,6 +5,7 @@ import 'package:self_noti/src/home/components/timer.dart';
 import 'package:self_noti/src/home/provider/home_provider.dart';
 import 'package:self_noti/src/home/provider/notification_provider.dart';
 import 'package:self_noti/src/home/provider/timer_provider.dart';
+import 'package:self_noti/style/styles.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,16 +21,27 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
+          centerTitle: true,
           title: Consumer<HomeProvider>(
             builder: (BuildContext context, HomeProvider provider, Widget? child) =>
-                Text(Provider.of<HomeProvider>(context).title),
+                Text(Provider.of<HomeProvider>(context).title, style: appBarTitleStyle),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  print('App Bar Menu Click!!!!!!!!!');
-                },
-                icon: const Icon(Icons.menu)),
+          actions:const [
+            // IconButton(
+            //     onPressed: () {
+            //       ScaffoldMessenger.of(context).showSnackBar(
+            //         SnackBar(
+            //           backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+            //           behavior: SnackBarBehavior.floating,
+            //           dismissDirection: DismissDirection.up,
+            //           elevation: 30,
+            //           content: Row(
+            //             children: [Text('아직 구현되지 않')],
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //     icon: const Icon(Icons.menu)),
           ],
         ),
         body: Column(

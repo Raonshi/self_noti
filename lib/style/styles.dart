@@ -22,6 +22,11 @@ TextStyle get labelStyle => const TextStyle(
       color: Colors.grey,
     );
 
+TextStyle get appBarTitleStyle => const TextStyle(
+  fontSize: 20.0,
+  fontWeight: FontWeight.w600,
+);
+
 TextStyle get titleSmallStyle => const TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,

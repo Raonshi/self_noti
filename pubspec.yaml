@@ -36,13 +36,26 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: 1.0.2
+
+  # state management
   provider: 6.0.4
+
+  # data model generator
   freezed_annotation: 2.2.0
   json_serializable: 6.5.1
+
+  # timer widget
   circular_countdown_timer: 0.2.2
+
+  # store data to local storage
   shared_preferences: 2.0.15
+
+  # date format
   intl: 0.17.0
+
+  # local notification
   flutter_local_notifications: 12.0.2
+  timezone: 0.9.0
 
 dev_dependencies:
   flutter_test:
