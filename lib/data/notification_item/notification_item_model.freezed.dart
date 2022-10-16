@@ -24,6 +24,7 @@ mixin _$NotificationItem {
   String? get content => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get expiredAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,8 @@ abstract class $NotificationItemCopyWith<$Res> {
       {String? title,
       String? content,
       DateTime? createdAt,
-      DateTime? updatedAt});
+      DateTime? updatedAt,
+      DateTime? expiredAt});
 }
 
 /// @nodoc
@@ -61,6 +63,7 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
     Object? content = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? expiredAt = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -79,6 +82,10 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      expiredAt: freezed == expiredAt
+          ? _value.expiredAt
+          : expiredAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -95,7 +102,8 @@ abstract class _$$_NotificationItemCopyWith<$Res>
       {String? title,
       String? content,
       DateTime? createdAt,
-      DateTime? updatedAt});
+      DateTime? updatedAt,
+      DateTime? expiredAt});
 }
 
 /// @nodoc
@@ -113,6 +121,7 @@ class __$$_NotificationItemCopyWithImpl<$Res>
     Object? content = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? expiredAt = freezed,
   }) {
     return _then(_$_NotificationItem(
       title: freezed == title
@@ -131,6 +140,10 @@ class __$$_NotificationItemCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      expiredAt: freezed == expiredAt
+          ? _value.expiredAt
+          : expiredAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -141,7 +154,11 @@ class _$_NotificationItem
     with DiagnosticableTreeMixin
     implements _NotificationItem {
   const _$_NotificationItem(
-      {this.title, this.content, this.createdAt, this.updatedAt});
+      {this.title,
+      this.content,
+      this.createdAt,
+      this.updatedAt,
+      this.expiredAt});
 
   factory _$_NotificationItem.fromJson(Map<String, dynamic> json) =>
       _$$_NotificationItemFromJson(json);
@@ -154,10 +171,12 @@ class _$_NotificationItem
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
+  @override
+  final DateTime? expiredAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationItem(title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'NotificationItem(title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, expiredAt: $expiredAt)';
   }
 
   @override
@@ -168,7 +187,8 @@ class _$_NotificationItem
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('expiredAt', expiredAt));
   }
 
   @override
@@ -181,13 +201,15 @@ class _$_NotificationItem
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.expiredAt, expiredAt) ||
+                other.expiredAt == expiredAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, title, content, createdAt, updatedAt);
+      Object.hash(runtimeType, title, content, createdAt, updatedAt, expiredAt);
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +230,8 @@ abstract class _NotificationItem implements NotificationItem {
       {final String? title,
       final String? content,
       final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_NotificationItem;
+      final DateTime? updatedAt,
+      final DateTime? expiredAt}) = _$_NotificationItem;
 
   factory _NotificationItem.fromJson(Map<String, dynamic> json) =
       _$_NotificationItem.fromJson;
@@ -221,6 +244,8 @@ abstract class _NotificationItem implements NotificationItem {
   DateTime? get createdAt;
   @override
   DateTime? get updatedAt;
+  @override
+  DateTime? get expiredAt;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationItemCopyWith<_$_NotificationItem> get copyWith =>

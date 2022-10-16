@@ -15,3 +15,16 @@ TextStyle get buttonTextStyle => const TextStyle(
       fontWeight: FontWeight.w600,
       color: Colors.white,
     );
+
+TextStyle get labelStyle => const TextStyle(
+  fontSize: 12.0,
+  fontWeight: FontWeight.w600,
+  color: Colors.grey,
+);
+
+TextStyle get titleSmallStyle => const TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.w600,
+);
+
+

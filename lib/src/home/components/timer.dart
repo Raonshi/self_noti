@@ -96,7 +96,6 @@ class TimerComponent extends StatelessWidget {
                           return TimerDialog(provider: provider);
                         },
                       );
-                      debugPrint('${provider.time}');
                       provider.timerStart();
                     },
                     child: Text('시간 설정', style: buttonTextStyle),

@@ -1,4 +1,3 @@
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:self_noti/data/notification_item/notification_item_model.dart';
 
@@ -23,15 +22,9 @@ class NotificationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addNotiItem() {
-    int index = notiItems.length;
-    notiItems.add(NotificationItem(
-      title: 'Test_$index',
-      content: 'Super Contents_$index',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ));
-
+  void addNotiItem(NotificationItem item) {
+    item = item.copyWith(createdAt: DateTime.now());
+    notiItems.add(item);
     notifyListeners();
   }
 }

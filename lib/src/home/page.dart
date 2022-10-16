@@ -31,7 +31,8 @@ class HomePage extends StatelessWidget {
               builder: (BuildContext context, TimerProvider provider, Widget? child) =>
                   TimerComponent(provider: provider),
             ),
-             Divider(thickness: 1.0, color: Colors.grey.shade300),
+             SizedBox(height: 4.0),
+             Divider(thickness: 2.0, color: Colors.grey.shade300, height: 1.0,),
             Expanded(
               child: Consumer<NotificationProvider>(
                 builder: (BuildContext context, NotificationProvider provider, Widget? child) =>

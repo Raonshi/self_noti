@@ -11,7 +11,7 @@ class NotificationItem with _$NotificationItem {
     String? content,
     DateTime? createdAt,
     DateTime? updatedAt,
-
+    DateTime? expiredAt,
   }) = _NotificationItem;
 
   factory NotificationItem.fromJson(Map<String, Object?> json)

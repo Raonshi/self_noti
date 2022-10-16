@@ -16,6 +16,9 @@ _$_NotificationItem _$$_NotificationItemFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
+      expiredAt: json['expiredAt'] == null
+          ? null
+          : DateTime.parse(json['expiredAt'] as String),
     );
 
 Map<String, dynamic> _$$_NotificationItemToJson(_$_NotificationItem instance) =>
@@ -24,4 +27,5 @@ Map<String, dynamic> _$$_NotificationItemToJson(_$_NotificationItem instance) =>
       'content': instance.content,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
+      'expiredAt': instance.expiredAt?.toIso8601String(),
     };
