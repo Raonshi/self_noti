@@ -32,6 +32,7 @@ class TimerProvider extends ChangeNotifier {
 
   void timerReset(){
     countdownController.reset();
+    clearTime();
     state = TimerState.idle;
     notifyListeners();
   }
@@ -40,5 +41,12 @@ class TimerProvider extends ChangeNotifier {
     countdownController.resume();
     state = TimerState.counting;
     notifyListeners();
+  }
+
+  void clearTime(){
+    time = 0;
+    hour = 0;
+    minute = 0;
+    second = 0;
   }
 }
