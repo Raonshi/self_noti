@@ -14,46 +14,43 @@ class TimerPage extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => TimerProvider()),
       ],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24.0),
-              child: Consumer<TimerProvider>(
-                builder: (BuildContext context, TimerProvider provider, Widget? child) {
-                  return TimerClock(provider: provider);
-                },
-              ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+            child: Consumer<TimerProvider>(
+              builder: (BuildContext context, TimerProvider provider, Widget? child) {
+                return TimerClock(provider: provider);
+              },
             ),
-            Consumer<TimerProvider>(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Consumer<TimerProvider>(
               builder: (BuildContext context, TimerProvider provider, Widget? child) {
                 return TimerButtons(provider: provider);
               },
             ),
-            const Divider(),
-            Expanded(
-              child: Consumer<TimerProvider>(
-                builder: (BuildContext context, TimerProvider provider, Widget? child) {
-                  return ListView.separated(
-                    itemCount: provider.timerItems.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return TimerListItem(
-                        data: provider.timerItems[index],
-                        onDelete: () {
-                          provider.onDeleteTimerItem(index);
-                        },
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 16.0);
-                    },
-                  );
-                },
-              ),
+          ),
+          const Divider(),
+          Expanded(
+            child: Consumer<TimerProvider>(
+              builder: (BuildContext context, TimerProvider provider, Widget? child) {
+                return ListView.builder(
+                  itemCount: provider.timerItems.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return TimerListItem(
+                      data: provider.timerItems[index],
+                      onDelete: () {
+                        provider.onDeleteTimerItem(index);
+                      },
+                    );
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

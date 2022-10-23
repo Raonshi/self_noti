@@ -32,38 +32,54 @@ class TimerListItemState extends State<TimerListItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(timerText, style: titleMediumStyle),
-        const Spacer(),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(),
-            fixedSize: const Size(48, 48),
-          ),
-          onPressed: onStart,
-          child: Text('시작', style: buttonTextSmallStyle),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: state == TimerState.idle && currentTime.inSeconds == 0
+            ? Theme.of(context).colorScheme.tertiary
+            : Colors.transparent,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Text(timerText, style: titleMediumStyle),
+            const Spacer(),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                fixedSize: const Size(48, 48),
+                backgroundColor: state == TimerState.counting
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              onPressed: onStart,
+              child: Text('시작', style: buttonTextSmallStyle),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                fixedSize: const Size(48, 48),
+                backgroundColor: state == TimerState.paused
+                    ? Theme.of(context).colorScheme.error
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              onPressed: onStop,
+              child: Text('일시\n정지', style: buttonTextSmallStyle),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                fixedSize: const Size(48, 48),
+              ),
+              onPressed: widget.onDelete,
+              child: Text(
+                '삭제',
+                style: buttonTextSmallStyle,
+              ),
+            ),
+          ],
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(),
-            fixedSize: const Size(48, 48),
-          ),
-          onPressed: onStop,
-          child: Text('일시\n정지', style: buttonTextSmallStyle),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(),
-            fixedSize: const Size(48, 48),
-          ),
-          onPressed: widget.onDelete,
-          child: Text(
-            '삭제',
-            style: buttonTextSmallStyle,
-          ),
-        ),
-      ],
+      ),
     );
   }
 
@@ -72,13 +88,15 @@ class TimerListItemState extends State<TimerListItem> {
   }
 
   void onStart() {
+    setState(() {
+      state = TimerState.counting;
+    });
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (initialTime.inSeconds - timer.tick <= 0) {
           state = TimerState.idle;
           timer.cancel();
         }
-        state = TimerState.counting;
 
         currentTime = Duration(seconds: initialTime.inSeconds - timer.tick);
         timerText = _getTime();
@@ -87,8 +105,10 @@ class TimerListItemState extends State<TimerListItem> {
   }
 
   void onStop() {
-    initialTime = currentTime;
-    state = TimerState.paused;
-    _timer.cancel();
+    setState(() {
+      initialTime = currentTime;
+      state = TimerState.paused;
+      _timer.cancel();
+    });
   }
 }

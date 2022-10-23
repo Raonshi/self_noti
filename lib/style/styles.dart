@@ -10,6 +10,13 @@ ButtonStyle get mainButtonStyleForm => ElevatedButton.styleFrom(
       backgroundColor: Colors.black,
     );
 
+ButtonStyle get timerItemStartButtonForm => ElevatedButton.styleFrom(
+      shape: const CircleBorder(side: BorderSide(color: Colors.black)),
+      elevation: 0,
+      backgroundColor: Colors.black,
+      fixedSize: const Size(48, 48),
+    );
+
 TextStyle get buttonTextLargeStyle => const TextStyle(
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
@@ -62,6 +69,7 @@ ThemeData get lightTheme => ThemeData(
         onPrimary: Colors.white,
         secondary: Colors.lightGreen.shade400,
         onSecondary: Colors.black,
+        tertiary: Colors.blueGrey.shade200,
         error: Colors.red.shade300,
         onError: Colors.white,
         background: Colors.grey.shade200,
