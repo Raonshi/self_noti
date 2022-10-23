@@ -31,15 +31,24 @@ class TimerPage extends StatelessWidget {
                 return TimerButtons(provider: provider);
               },
             ),
-            Divider(),
+            const Divider(),
             Expanded(
-              child: ListView.separated(
-                itemCount: 30,
-                itemBuilder: (BuildContext context, int index) {
-                  return TimerListItem();
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(height: 16.0);
+              child: Consumer<TimerProvider>(
+                builder: (BuildContext context, TimerProvider provider, Widget? child) {
+                  return ListView.separated(
+                    itemCount: provider.timerItems.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return TimerListItem(
+                        data: provider.timerItems[index],
+                        onDelete: () {
+                          provider.onDeleteTimerItem(index);
+                        },
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 16.0);
+                    },
+                  );
                 },
               ),
             ),

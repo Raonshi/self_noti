@@ -13,56 +13,25 @@ class TimerButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (provider.state == TimerState.counting) ...[
-          Expanded(
-            child: ElevatedButton(
-              style: mainButtonStyleForm,
-              onPressed: provider.timerReset,
-              child: Text('정지', style: buttonTextLargeStyle),
-            ),
+        Expanded(
+          child: ElevatedButton(
+            style: mainButtonStyleForm,
+            onPressed: () async {
+              bool isTimeSetted = await showDialog(
+                context: context,
+                builder: (_) {
+                  return TimerDialog(provider: provider);
+                },
+              );
+
+              if (isTimeSetted) {
+                provider.setTimer();
+              }
+              provider.clearTime();
+            },
+            child: Text('타이머 추가', style: buttonTextLargeStyle),
           ),
-          const SizedBox(width: 12.0),
-          Expanded(
-            child: ElevatedButton(
-              style: mainButtonStyleForm,
-              onPressed: provider.timerPause,
-              child: Text('일시 정지', style: buttonTextLargeStyle),
-            ),
-          ),
-        ],
-        if (provider.state == TimerState.paused) ...[
-          Expanded(
-            child: ElevatedButton(
-              style: mainButtonStyleForm,
-              onPressed: provider.timerReset,
-              child: Text('정지', style: buttonTextLargeStyle),
-            ),
-          ),
-          const SizedBox(width: 12.0),
-          Expanded(
-            child: ElevatedButton(
-              style: mainButtonStyleForm,
-              onPressed: provider.timerResume,
-              child: Text('재개', style: buttonTextLargeStyle),
-            ),
-          )
-        ],
-        if (provider.state == TimerState.idle)
-          Expanded(
-            child: ElevatedButton(
-              style: mainButtonStyleForm,
-              onPressed: () async {
-                await showDialog(
-                  context: context,
-                  builder: (_) {
-                    return TimerDialog(provider: provider);
-                  },
-                );
-                provider.timerStart();
-              },
-              child: Text('시간 설정', style: buttonTextLargeStyle),
-            ),
-          ),
+        ),
       ],
     );
   }

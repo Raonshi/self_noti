@@ -14,7 +14,7 @@ class TimerDialog extends StatelessWidget {
       value: provider,
       child: Consumer<TimerProvider>(
         builder: (BuildContext context, TimerProvider provider, Widget? child) => AlertDialog(
-          title: Text('Set Time'),
+          title: Text('타이머 추가'),
           content: Row(
             children: [
               // Hour
@@ -60,13 +60,12 @@ class TimerDialog extends StatelessWidget {
           actions: [
             ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(false);
                 },
                 child: const Text('취소')),
             ElevatedButton(
                 onPressed: () {
-                  provider.setTimer();
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(true);
                 },
                 child: const Text('시작')),
           ],
