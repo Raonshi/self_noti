@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:self_noti/src/home/page.dart';
 import 'package:self_noti/style/styles.dart';
 
-
 void main() {
   Provider.debugCheckInvalidValueType = null;
   runApp(const MyApp());
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '셀티',
       theme: lightTheme,
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
