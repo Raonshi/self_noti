@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:self_noti/src/home/provider/home_provider.dart';
 import 'package:self_noti/src/home/provider/notification_provider.dart';
-import 'package:self_noti/src/home/provider/timer_provider.dart';
-import 'package:self_noti/src/timer%20copy/page.dart';
+import 'package:self_noti/src/notification/page.dart';
 import 'package:self_noti/src/timer/page.dart';
 import 'package:self_noti/style/styles.dart';
 
@@ -17,7 +16,6 @@ class HomePage extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HomeProvider()),
-        ChangeNotifierProvider(create: (context) => TimerProvider()),
         ChangeNotifierProvider(create: (context) => NotificationProvider()),
       ],
       child: Scaffold(

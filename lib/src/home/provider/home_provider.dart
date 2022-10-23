@@ -1,7 +1,4 @@
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:self_noti/data/notification_item/notification_item_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeProvider extends ChangeNotifier {
   String title = '셀 티';
@@ -14,7 +11,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void onClickBottomTap(int index) {
-    pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.decelerate);
     currentPageIndex = index;
     notifyListeners();
   }

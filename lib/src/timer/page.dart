@@ -1,14 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
+import 'package:self_noti/src/timer/components/timer_buttons.dart';
+import 'package:self_noti/src/timer/components/timer_clock.dart';
+import 'package:self_noti/src/timer/provider/timer_provider.dart';
 
 class TimerPage extends StatelessWidget {
   const TimerPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Timer'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TimerProvider()),
+      ],
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+            child: Consumer<TimerProvider>(
+              builder: (BuildContext context, TimerProvider provider, Widget? child) {
+                return TimerClock(provider: provider);
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Consumer<TimerProvider>(
+              builder: (BuildContext context, TimerProvider provider, Widget? child) {
+                return TimerButtons(provider: provider);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

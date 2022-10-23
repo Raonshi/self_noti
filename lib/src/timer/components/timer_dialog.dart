@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:self_noti/enum.dart';
-import 'package:self_noti/src/home/provider/timer_provider.dart';
+import 'package:self_noti/src/timer/provider/timer_provider.dart';
 
 class TimerDialog extends StatelessWidget {
   const TimerDialog({Key? key, required this.provider}) : super(key: key);
