@@ -10,8 +10,27 @@ ButtonStyle get mainButtonStyleForm => ElevatedButton.styleFrom(
       backgroundColor: Colors.black,
     );
 
-TextStyle get buttonTextStyle => const TextStyle(
+ButtonStyle get timerItemStartButtonForm => ElevatedButton.styleFrom(
+      shape: const CircleBorder(side: BorderSide(color: Colors.black)),
+      elevation: 0,
+      backgroundColor: Colors.black,
+      fixedSize: const Size(48, 48),
+    );
+
+TextStyle get buttonTextLargeStyle => const TextStyle(
       fontSize: 20.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    );
+
+TextStyle get buttonTextMediumStyle => const TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    );
+
+TextStyle get buttonTextSmallStyle => const TextStyle(
+      fontSize: 13.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     );
@@ -23,21 +42,25 @@ TextStyle get labelStyle => const TextStyle(
     );
 
 TextStyle get appBarTitleStyle => const TextStyle(
-  fontSize: 20.0,
-  fontWeight: FontWeight.w600,
-);
+      fontSize: 20.0,
+      fontWeight: FontWeight.w600,
+    );
+
+TextStyle get titleMediumStyle => const TextStyle(
+      fontSize: 22.0,
+      fontWeight: FontWeight.w600,
+    );
 
 TextStyle get titleSmallStyle => const TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
     );
 
-
 TextStyle get guideTextStyle => TextStyle(
-  fontSize: 16.0,
-  fontWeight: FontWeight.w400,
-  color: Colors.grey.shade400,
-);
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey.shade400,
+    );
 
 ThemeData get lightTheme => ThemeData(
       colorScheme: ColorScheme(
@@ -46,6 +69,7 @@ ThemeData get lightTheme => ThemeData(
         onPrimary: Colors.white,
         secondary: Colors.lightGreen.shade400,
         onSecondary: Colors.black,
+        tertiary: Colors.blueGrey.shade200,
         error: Colors.red.shade300,
         onError: Colors.white,
         background: Colors.grey.shade200,

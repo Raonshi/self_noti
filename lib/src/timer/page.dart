@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:self_noti/src/timer/components/timer_buttons.dart';
 import 'package:self_noti/src/timer/components/timer_clock.dart';
+import 'package:self_noti/src/timer/components/timer_list_item.dart';
 import 'package:self_noti/src/timer/provider/timer_provider.dart';
 
 class TimerPage extends StatelessWidget {
@@ -28,6 +29,24 @@ class TimerPage extends StatelessWidget {
             child: Consumer<TimerProvider>(
               builder: (BuildContext context, TimerProvider provider, Widget? child) {
                 return TimerButtons(provider: provider);
+              },
+            ),
+          ),
+          const Divider(),
+          Expanded(
+            child: Consumer<TimerProvider>(
+              builder: (BuildContext context, TimerProvider provider, Widget? child) {
+                return ListView.builder(
+                  itemCount: provider.timerItems.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return TimerListItem(
+                      data: provider.timerItems[index],
+                      onDelete: () {
+                        provider.onDeleteTimerItem(index);
+                      },
+                    );
+                  },
+                );
               },
             ),
           ),

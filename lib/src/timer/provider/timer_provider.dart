@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:self_noti/data/timer_item/timer_item_model.dart';
 import 'package:self_noti/enum.dart';
 
 class TimerProvider extends ChangeNotifier {
@@ -13,8 +14,10 @@ class TimerProvider extends ChangeNotifier {
   CountDownController countdownController = CountDownController();
   TimerState state = TimerState.idle;
 
-  void setTimer(){
-    time = second + (60 * minute) + (3600 * hour);
+  List<TimerItemModel> timerItems = <TimerItemModel>[];
+
+  void setTimer() {
+    timerItems.add(TimerItemModel(time: second + (60 * minute) + (3600 * hour)));
     notifyListeners();
   }
 
@@ -30,7 +33,7 @@ class TimerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void timerReset(){
+  void timerReset() {
     countdownController.reset();
     clearTime();
     state = TimerState.idle;
@@ -43,10 +46,15 @@ class TimerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearTime(){
+  void clearTime() {
     time = 0;
     hour = 0;
     minute = 0;
     second = 0;
+  }
+
+  void onDeleteTimerItem(int index) {
+    timerItems.removeAt(index);
+    notifyListeners();
   }
 }
