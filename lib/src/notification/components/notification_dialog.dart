@@ -73,7 +73,7 @@ class NotificationDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('취소', style: buttonTextStyle.copyWith(fontSize: 16.0)),
+                child: Text('취소', style: buttonTextLargeStyle.copyWith(fontSize: 16.0)),
               ),
               ElevatedButton(
                 style: mainButtonStyleForm,
@@ -87,7 +87,7 @@ class NotificationDialog extends StatelessWidget {
                     Navigator.of(context).pop();
                   }
                 },
-                child: Text(index == null ? '생성' : '수정', style: buttonTextStyle.copyWith(fontSize: 16.0)),
+                child: Text(index == null ? '생성' : '수정', style: buttonTextLargeStyle.copyWith(fontSize: 16.0)),
               ),
             ],
             actionsAlignment: MainAxisAlignment.spaceAround,

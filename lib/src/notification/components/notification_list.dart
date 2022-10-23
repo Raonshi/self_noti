@@ -56,7 +56,7 @@ class NotificationListComponent extends StatelessWidget {
                     },
                   );
                 },
-                child: Text('알림 추가', style: buttonTextStyle),
+                child: Text('알림 추가', style: buttonTextLargeStyle),
               ),
             ),
           ]),

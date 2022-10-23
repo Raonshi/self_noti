@@ -18,7 +18,7 @@ class TimerButtons extends StatelessWidget {
             child: ElevatedButton(
               style: mainButtonStyleForm,
               onPressed: provider.timerReset,
-              child: Text('정지', style: buttonTextStyle),
+              child: Text('정지', style: buttonTextLargeStyle),
             ),
           ),
           const SizedBox(width: 12.0),
@@ -26,7 +26,7 @@ class TimerButtons extends StatelessWidget {
             child: ElevatedButton(
               style: mainButtonStyleForm,
               onPressed: provider.timerPause,
-              child: Text('일시 정지', style: buttonTextStyle),
+              child: Text('일시 정지', style: buttonTextLargeStyle),
             ),
           ),
         ],
@@ -35,7 +35,7 @@ class TimerButtons extends StatelessWidget {
             child: ElevatedButton(
               style: mainButtonStyleForm,
               onPressed: provider.timerReset,
-              child: Text('정지', style: buttonTextStyle),
+              child: Text('정지', style: buttonTextLargeStyle),
             ),
           ),
           const SizedBox(width: 12.0),
@@ -43,7 +43,7 @@ class TimerButtons extends StatelessWidget {
             child: ElevatedButton(
               style: mainButtonStyleForm,
               onPressed: provider.timerResume,
-              child: Text('재개', style: buttonTextStyle),
+              child: Text('재개', style: buttonTextLargeStyle),
             ),
           )
         ],
@@ -60,7 +60,7 @@ class TimerButtons extends StatelessWidget {
                 );
                 provider.timerStart();
               },
-              child: Text('시간 설정', style: buttonTextStyle),
+              child: Text('시간 설정', style: buttonTextLargeStyle),
             ),
           ),
       ],

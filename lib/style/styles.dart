@@ -10,8 +10,20 @@ ButtonStyle get mainButtonStyleForm => ElevatedButton.styleFrom(
       backgroundColor: Colors.black,
     );
 
-TextStyle get buttonTextStyle => const TextStyle(
+TextStyle get buttonTextLargeStyle => const TextStyle(
       fontSize: 20.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    );
+
+TextStyle get buttonTextMediumStyle => const TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    );
+
+TextStyle get buttonTextSmallStyle => const TextStyle(
+      fontSize: 13.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     );
@@ -23,21 +35,25 @@ TextStyle get labelStyle => const TextStyle(
     );
 
 TextStyle get appBarTitleStyle => const TextStyle(
-  fontSize: 20.0,
-  fontWeight: FontWeight.w600,
-);
+      fontSize: 20.0,
+      fontWeight: FontWeight.w600,
+    );
+
+TextStyle get titleMediumStyle => const TextStyle(
+      fontSize: 22.0,
+      fontWeight: FontWeight.w600,
+    );
 
 TextStyle get titleSmallStyle => const TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
     );
 
-
 TextStyle get guideTextStyle => TextStyle(
-  fontSize: 16.0,
-  fontWeight: FontWeight.w400,
-  color: Colors.grey.shade400,
-);
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey.shade400,
+    );
 
 ThemeData get lightTheme => ThemeData(
       colorScheme: ColorScheme(
